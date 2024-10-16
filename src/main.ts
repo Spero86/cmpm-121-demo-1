@@ -25,9 +25,10 @@ button.addEventListener("click", () => {
 
 // Step 3 - Automatic clicking
 const autoStrummer = () => {
-    guitarStrum++;
-    strumCount.textContent = `Guitar Strum Count: ${guitarStrum}`;
-}
+  guitarStrum++;
+  console.log(`Auto-Strum: ${guitarStrum}`);
+  strumCount.textContent = `Guitar Strum Count: ${guitarStrum}`;
+};
 
 setInterval(autoStrummer, 1000); // strums the guitar every second
 
