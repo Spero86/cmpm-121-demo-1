@@ -34,7 +34,7 @@ const autoStrummer = () => {
 setInterval(autoStrummer, 1000); // strums the guitar every second
 */
 
-// Step 4 - Continuous growth
+// Step 4 - Continuous growth (Completed)
 let tStamp: number = 0;
 
 // updates the guitar strum counter based on time
@@ -42,7 +42,7 @@ const updateStrum = (timestamp: number) => {
   if (!tStamp) tStamp = timestamp;
   const delta = timestamp - tStamp;
   // increment based on time
-  const increment = delta / 1000; // increment by (delta ms / 1000 ms)
+  const increment = (delta / 1000) * (1 + guitarGrowth); // increment by (delta ms / 1000 ms) and factor in guitarGrowth
   guitarStrum += increment;
   // updates button
   strumCount.textContent = `Guitar Strum Count: ${guitarStrum}`;
@@ -55,6 +55,33 @@ const updateStrum = (timestamp: number) => {
 
 requestAnimationFrame(updateStrum);
 
+// Step 5 - Purchasing an upgrade
+let guitarGrowth: number = 0;
+
+// fingerPicking upgrade button
+const fingerPicking = document.createElement('button');
+fingerPicking.textContent = "Learn how to use your fingers to strum the guitar! (10 strums)";
+fingerPicking.disabled = true; // starts disabled
+
+// upgrades when clicked
+fingerPicking.addEventListener('click', () => {
+    if (guitarStrum >= 10){
+        guitarStrum-= 10;
+        guitarGrowth += 1;
+        updateGuitarStrum();
+    }
+})
+// updating the applications display
+const updateGuitarStrum = () => {
+    strumCount.textContent = `Guitar Strum Count: ${guitarStrum}`;
+    fingerPicking.disabled = guitarStrum < 10;
+}
+
+// fingerPicking upgrade button formatting
+fingerPicking.style.padding = '20px 20px';
+fingerPicking.style.fontSize = '35px';
+fingerPicking.style.marginTop = '10px';
+
 // button formatting
 button.style.padding = "15px 15px";
 button.style.fontSize = "35px";
@@ -63,3 +90,4 @@ button.style.marginTop = "10px";
 app.append(header); // adds header
 app.append(button); // adds button
 app.append(strumCount); // adds guitar strum counter
+app.append(fingerPicking); // adds fingerPicking upgrade
