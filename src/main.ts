@@ -42,7 +42,7 @@ const updateStrum = (timestamp: number) => {
   if (!tStamp) tStamp = timestamp;
   const delta = timestamp - tStamp;
   // increment based on time
-  const increment = (delta / 1000) * (1 + guitarGrowth); // increment by (delta ms / 1000 ms) and factor in guitarGrowth
+  const increment = (delta / 1000); // increment by (delta ms / 1000 ms) and factor in guitarGrowth
   guitarStrum += increment;
   // updates button
   strumCount.textContent = `Guitar Strum Count: ${guitarStrum}`;
@@ -59,28 +59,46 @@ requestAnimationFrame(updateStrum);
 let guitarGrowth: number = 0;
 
 // fingerPicking upgrade button
-const fingerPicking = document.createElement('button');
-fingerPicking.textContent = "Learn how to use your fingers to strum the guitar! (10 strums)";
+const fingerPicking = document.createElement("button");
+fingerPicking.textContent =
+  "Learn how to use your fingers to strum the guitar! (10 strums)";
 fingerPicking.disabled = true; // starts disabled
-
+/*
 // upgrades when clicked
-fingerPicking.addEventListener('click', () => {
-    if (guitarStrum >= 10){
-        guitarStrum-= 10;
-        guitarGrowth += 1;
-        updateGuitarStrum();
-    }
-})
+fingerPicking.addEventListener("click", () => {
+  if (guitarStrum >= 10) {
+    guitarStrum -= 10;
+    guitarGrowth += 1;
+    updateGuitarStrum();
+  }
+});
+*/
+
+// Create a display element for guitarGrowth
+const guitarGrowthDisplay = document.createElement("div");
+guitarGrowthDisplay.textContent = `Guitar Growth: ${guitarGrowth}`;
+document.body.appendChild(guitarGrowthDisplay);
+
+// Update the display when guitarGrowth changes
+fingerPicking.addEventListener("click", () => {
+  if (guitarStrum >= 10) {
+    guitarStrum -= 10;
+    guitarGrowth += 1;
+    updateGuitarStrum();
+    guitarGrowthDisplay.textContent = `Guitar Growth: ${guitarGrowth}`;
+  }
+});
+
 // updating the applications display
 const updateGuitarStrum = () => {
-    strumCount.textContent = `Guitar Strum Count: ${guitarStrum}`;
-    fingerPicking.disabled = guitarStrum < 10;
-}
+  strumCount.textContent = `Guitar Strum Count: ${guitarStrum}`;
+  fingerPicking.disabled = guitarStrum < 10;
+};
 
 // fingerPicking upgrade button formatting
-fingerPicking.style.padding = '20px 20px';
-fingerPicking.style.fontSize = '35px';
-fingerPicking.style.marginTop = '10px';
+fingerPicking.style.padding = "20px 20px";
+fingerPicking.style.fontSize = "35px";
+fingerPicking.style.marginTop = "10px";
 
 // button formatting
 button.style.padding = "15px 15px";
