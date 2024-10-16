@@ -8,8 +8,7 @@ document.title = gameName;
 const header = document.createElement("h1");
 header.innerHTML = gameName;
 
-
-// Step 1 - A button you can click
+// Step 1 - A button you can click (Completed)
 const button = document.createElement("button");
 button.textContent = "🎸";
 
@@ -25,5 +24,6 @@ button.style.fontSize = "35px";
 button.style.marginTop = "10px";
 
 console.log(guitarStrum); // states how many times the guitar has been strummed
+
 app.append(header); // adds header
 app.append(button); // adds button
