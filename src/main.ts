@@ -42,7 +42,7 @@ const updateStrum = (timestamp: number) => {
   if (!tStamp) tStamp = timestamp;
   const delta = timestamp - tStamp;
   // increment based on time
-  const increment = (delta / 1000); // increment by (delta ms / 1000 ms) and factor in guitarGrowth
+  const increment = delta / 1000; // increment by (delta ms / 1000 ms) and factor in guitarGrowth
   guitarStrum += increment;
   // updates button
   strumCount.textContent = `Guitar Strum Count: ${guitarStrum}`;
@@ -63,6 +63,7 @@ const fingerPicking = document.createElement("button");
 fingerPicking.textContent =
   "Learn how to use your fingers to strum the guitar! (10 strums)";
 fingerPicking.disabled = true; // starts disabled
+
 /*
 // upgrades when clicked
 fingerPicking.addEventListener("click", () => {
