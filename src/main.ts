@@ -23,6 +23,7 @@ button.addEventListener("click", () => {
   strumCount.textContent = `Guitar Strum Count: ${guitarStrum}`;
 });
 
+/*
 // Step 3 - Automatic clicking (Completed)
 const autoStrummer = () => {
   guitarStrum++;
@@ -31,6 +32,28 @@ const autoStrummer = () => {
 };
 
 setInterval(autoStrummer, 1000); // strums the guitar every second
+*/
+
+// Step 4 - Continuous growth
+let timeStamp: number = 0;
+
+// updates the guitar strum counter based on time
+const updateStrum = (timestamp: number) => {
+    if (!timeStamp) timeStamp = timestamp;
+    const delta = timestamp - timeStamp;
+    // increment based on time
+    const increment = (delta / 1000); // increment by (delta ms / 1000 ms)
+    guitarStrum += increment;
+    // updates button
+    strumCount.textContent = `Guitar Strum Count: ${guitarStrum}`;
+    // Set the timeStamp to the current timestamp
+    timeStamp = timestamp;
+    
+    // Request the next frame
+    requestAnimationFrame(updateStrum);
+}
+
+requestAnimationFrame(updateStrum);
 
 // button formatting
 button.style.padding = "15px 15px";
