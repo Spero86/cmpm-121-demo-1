@@ -23,6 +23,14 @@ button.addEventListener("click", () => {
   strumCount.textContent = `Guitar Strum Count: ${guitarStrum}`;
 });
 
+// Step 3 - Automatic clicking
+const autoStrummer = () => {
+    guitarStrum++;
+    strumCount.textContent = `Guitar Strum Count: ${guitarStrum}`;
+}
+
+setInterval(autoStrummer, 1000); // strums the guitar every second
+
 // button formatting
 button.style.padding = "15px 15px";
 button.style.fontSize = "35px";
