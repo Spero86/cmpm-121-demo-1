@@ -12,10 +12,10 @@ header.innerHTML = gameName;
 const button = document.createElement("button");
 button.textContent = "🎸";
 
-// Step 2 - Clicking increases a counter
-const strumCount = document.createElement('div');
+// Step 2 - Clicking increases a counter (Completed)
+const strumCount = document.createElement("div");
 let guitarStrum: number = 0; // keeps track of how many times the guitar has been strummed
-//strumCount.textContent = `Guitar Strum Count: ${guitarStrum}`;
+strumCount.textContent = `Guitar Strum Count: ${guitarStrum}`; // displays strum counter
 
 // When the button is clicked, the guitarStrum counter increments
 button.addEventListener("click", () => {
@@ -27,8 +27,6 @@ button.addEventListener("click", () => {
 button.style.padding = "15px 15px";
 button.style.fontSize = "35px";
 button.style.marginTop = "10px";
-
-// console.log(guitarStrum); // states how many times the guitar has been strummed
 
 app.append(header); // adds header
 app.append(button); // adds button
