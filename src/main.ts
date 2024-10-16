@@ -23,10 +23,10 @@ button.addEventListener("click", () => {
   strumCount.textContent = `Guitar Strum Count: ${guitarStrum}`;
 });
 
-// Step 3 - Automatic clicking
+// Step 3 - Automatic clicking (Completed)
 const autoStrummer = () => {
   guitarStrum++;
-  console.log(`Auto-Strum: ${guitarStrum}`);
+  // console.log(`Auto-Strum: ${guitarStrum}`); // for debugging
   strumCount.textContent = `Guitar Strum Count: ${guitarStrum}`;
 };
 
