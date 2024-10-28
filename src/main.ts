@@ -13,7 +13,6 @@ app.append(header);
 
 // Step 1 - A button you can click
 const button = document.createElement("button");
-button.classList.add("guitar-button");
 button.textContent = "🎸";
 app.append(button);
 
