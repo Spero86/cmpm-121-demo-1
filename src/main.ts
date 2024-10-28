@@ -2,19 +2,98 @@ import "./style.css";
 
 const app: HTMLDivElement = document.querySelector("#app")!;
 
+// title
 const gameName = "Guitar Strummer";
 document.title = gameName;
 
+// header
 const header = document.createElement("h1");
 header.innerHTML = gameName;
+app.append(header);
 
-// Step 1 - A button you can click (Completed)
+// Step 1 - A button you can click
 const button = document.createElement("button");
 button.textContent = "🎸";
+app.append(button);
 
-// Step 2 - Clicking increases a counter (Completed)
+// Step 2 - Clicking increases a counter
 const strumCount = document.createElement("div");
-let guitarStrum = 0; // keeps track of how many times the guitar has been strummed
+let guitarStrum: number = 0;
+strumCount.textContent = `Guitar Strum Count: ${guitarStrum.toFixed(0)}`;
+app.append(strumCount);
+
+// Step 6 - Multiple upgrades and status
+const guitarGrowthDisplay = document.createElement("div");
+let guitarGrowth: number = 0; // set the initial growth rate to 0
+guitarGrowthDisplay.textContent = `Guitar Growth: ${guitarGrowth.toFixed(0)} strums/sec`;
+app.append(guitarGrowthDisplay);
+
+// Step 9 - Data Driven Design
+const skillCountsDisplay = document.createElement("div");
+interface Skill {
+  name: string;
+  cost: number;
+  rate: number;
+  description: string;
+}
+
+// Step 8 - Consistent Narrative
+// Step 10 - Content Expansion
+const allSkills: Skill[] = [
+  { name: "Fingerpicking", cost: 10, rate: 0.1, description: '"Learn how to use your fingers to strum your guitar!"' },
+  { name: "Bocchi the Rock Watchathon ", cost: 100, rate: 2, description: '"Become inspired to strum faster after watching Bocchi the Rock!"' },
+  { name: "Zoom Guitar Teacher", cost: 1000, rate: 50, description: '"Become a teacher and let students strum for you!"' },
+  { name: "Tim Henson Work Ethic", cost: 10000, rate: 100, description: '"Gain the elite work ethic of Tim Henson from Polyphia!"' },
+  { name: "Master of Shredding", cost: 100000, rate: 1000, description: '"The constant practice has led you to guitar strumming ascension."' },
+  { name: "Possessed by Jimi Hendrix", cost: 10000000, rate: 10000000, description: '"The skill and finesse of Jimi Hendrix suddenly courses through your fingers!"' }
+];
+
+const skillCounts: Record<string, number> = {};
+allSkills.forEach((skill) => (skillCounts[skill.name] = 0));
+
+skillCountsDisplay.innerHTML = `Skills Purchased: ${allSkills.map((skill) => `${skill.name}: ${skillCounts[skill.name]}`).join(", ")}`;
+app.append(skillCountsDisplay);
+
+// Step 5 - Purchasing an upgrade
+const upgrades = allSkills.map((skill) => ({
+  ...skill,
+  currentCost: skill.cost,
+  button: undefined as HTMLButtonElement | undefined,
+}));
+
+upgrades.forEach((upgrade) => {
+  const upgradeButton = document.createElement("button");
+  upgradeButton.innerHTML = `Buy ${upgrade.name} (+${upgrade.rate} strums/sec) - ${upgrade.currentCost.toFixed(0)} strums`;
+  upgradeButton.disabled = true; // initially disabled
+  app.append(upgradeButton);
+
+  // Step 7 - Price increases
+  upgradeButton.addEventListener("click", () => {
+    if (guitarStrum >= upgrade.currentCost) {
+      guitarStrum -= upgrade.currentCost;
+      guitarGrowth += upgrade.rate;
+      skillCounts[upgrade.name]++;
+      upgrade.currentCost *= 1.15; // increase cost by factor of 1.15
+      updateGuitarStrumDisplay();
+    }
+  });
+  
+  upgrade.button = upgradeButton;
+});
+
+// (step 5 & 6)
+const updateGuitarStrumDisplay = () => {
+  strumCount.innerHTML = `${guitarStrum.toFixed(0)} strums`;
+  guitarGrowthDisplay.innerHTML = `Growth Rate: ${guitarGrowth.toFixed(0)} strums/sec`;
+  skillCountsDisplay.innerHTML = `Skills Purchased: ${allSkills.map((skill) => `${skill.name}: ${skillCounts[skill.name]}`).join(", ")}`;
+  upgrades.forEach((upgrade) => {
+    if (upgrade.button) {
+      upgrade.button.innerHTML = `Buy: ${upgrade.name} (+${upgrade.rate} strums/sec) - Cost: ${upgrade.currentCost.toFixed(0)} strums <br> ${upgrade.description}`;
+      upgrade.button.disabled = guitarStrum < upgrade.currentCost;
+    }
+  });
+};
+
 
 // When the button is clicked, the guitarStrum counter increments
 button.addEventListener("click", () => {
@@ -22,23 +101,8 @@ button.addEventListener("click", () => {
   updateGuitarStrumDisplay();
 });
 
-const updateGuitarStrumDisplay = () => {
-  strumCount.textContent = `Guitar Strum Count: ${guitarStrum.toFixed(0)}`;
-  fingerPicking.disabled = guitarStrum < 10;
-};
-
-/* Step 3 - Automatic clicking (Completed)
-const autoStrummer = () => {
-  guitarStrum++;
-  updateGuitarStrumDisplay();
-};
-
-setInterval(autoStrummer, 1000); // strums the guitar every second
-*/
-
-// Step 4 - Continuous growth (Completed)
+// Step 4 - Continuous growth
 let tStamp = 0;
-let guitarGrowth = 1; // set the initial growth rate to 1
 
 // updates the guitar strum counter based on time
 const updateStrum = (timestamp: number) => {
@@ -53,27 +117,11 @@ const updateStrum = (timestamp: number) => {
 
 requestAnimationFrame(updateStrum);
 
-// Step 5 - Purchasing an upgrade
-const fingerPicking = document.createElement("button");
-fingerPicking.textContent = "Learn how to use your fingers to strum the guitar! (10 strums)";
-fingerPicking.disabled = true;
+/* Step 3 - Automatic clicking (Completed)
+const autoStrummer = () => {
+  guitarStrum++;
+  updateGuitarStrumDisplay();
+};
 
-// upgrades when clicked
-fingerPicking.addEventListener("click", () => {
-  if (guitarStrum >= 10) {
-    guitarStrum -= 10;
-    guitarGrowth += 1;
-    updateGuitarStrumDisplay();
-    guitarGrowthDisplay.textContent = `Guitar Growth: ${guitarGrowth}`;
-  }
-});
-
-// Create a display element for guitarGrowth
-const guitarGrowthDisplay = document.createElement("div");
-guitarGrowthDisplay.textContent = `Guitar Growth: ${guitarGrowth}`;
-document.body.appendChild(guitarGrowthDisplay);
-
-app.append(header);
-app.append(button);
-app.append(strumCount);
-app.append(fingerPicking);
+setInterval(autoStrummer, 1000); // strums the guitar every second
+*/
