@@ -25,7 +25,7 @@ app.append(strumCount);
 // Step 6 - Multiple upgrades and status
 const guitarGrowthDisplay = document.createElement("div");
 let guitarGrowth: number = 0; // set the initial growth rate to 0
-guitarGrowthDisplay.textContent = `Guitar Growth: ${guitarGrowth.toFixed(0)} strums/sec`;
+guitarGrowthDisplay.textContent = `Guitar Growth: ${guitarGrowth.toFixed(2)} strums/sec`;
 app.append(guitarGrowthDisplay);
 
 // Step 9 - Data Driven Design
@@ -40,12 +40,45 @@ interface Skill {
 // Step 8 - Consistent Narrative
 // Step 10 - Content Expansion
 const allSkills: Skill[] = [
-  { name: "Fingerpicking", cost: 10, rate: 0.1, description: '"Learn how to use your fingers to strum your guitar!"' },
-  { name: "Bocchi the Rock Watchathon ", cost: 100, rate: 2, description: '"Become inspired to strum faster after watching Bocchi the Rock!"' },
-  { name: "Zoom Guitar Teacher", cost: 1000, rate: 50, description: '"Become a teacher and let students strum for you!"' },
-  { name: "Tim Henson Work Ethic", cost: 10000, rate: 100, description: '"Gain the elite work ethic of Tim Henson from Polyphia!"' },
-  { name: "Master of Shredding", cost: 100000, rate: 1000, description: '"The constant practice has led you to guitar strumming ascension."' },
-  { name: "Possessed by Jimi Hendrix", cost: 10000000, rate: 10000000, description: '"The skill and finesse of Jimi Hendrix suddenly courses through your fingers!"' }
+  {
+    name: "Fingerpicking",
+    cost: 10,
+    rate: 0.1,
+    description: '"Learn how to use your fingers to strum your guitar!"',
+  },
+  {
+    name: "Bocchi the Rock Watchathon ",
+    cost: 100,
+    rate: 2,
+    description:
+      '"Become inspired to strum faster after watching Bocchi the Rock!"',
+  },
+  {
+    name: "Zoom Guitar Teacher",
+    cost: 1000,
+    rate: 50,
+    description: '"Become a teacher and let students strum for you!"',
+  },
+  {
+    name: "Tim Henson Work Ethic",
+    cost: 10000,
+    rate: 100,
+    description: '"Gain the elite work ethic of Tim Henson from Polyphia!"',
+  },
+  {
+    name: "Master of Shredding",
+    cost: 100000,
+    rate: 1000,
+    description:
+      '"The constant practice has led you to guitar strumming ascension."',
+  },
+  {
+    name: "Possessed by Jimi Hendrix",
+    cost: 10000000,
+    rate: 10000000,
+    description:
+      '"The skill and finesse of Jimi Hendrix suddenly courses through your fingers!"',
+  },
 ];
 
 const skillCounts: Record<string, number> = {};
@@ -77,14 +110,14 @@ upgrades.forEach((upgrade) => {
       updateGuitarStrumDisplay();
     }
   });
-  
+
   upgrade.button = upgradeButton;
 });
 
 // (step 5 & 6)
 const updateGuitarStrumDisplay = () => {
   strumCount.innerHTML = `${guitarStrum.toFixed(0)} strums`;
-  guitarGrowthDisplay.innerHTML = `Growth Rate: ${guitarGrowth.toFixed(0)} strums/sec`;
+  guitarGrowthDisplay.innerHTML = `Growth Rate: ${guitarGrowth.toFixed(2)} strums/sec`;
   skillCountsDisplay.innerHTML = `Skills Purchased: ${allSkills.map((skill) => `${skill.name}: ${skillCounts[skill.name]}`).join(", ")}`;
   upgrades.forEach((upgrade) => {
     if (upgrade.button) {
@@ -93,7 +126,6 @@ const updateGuitarStrumDisplay = () => {
     }
   });
 };
-
 
 // When the button is clicked, the guitarStrum counter increments
 button.addEventListener("click", () => {
