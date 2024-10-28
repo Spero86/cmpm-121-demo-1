@@ -14,99 +14,66 @@ button.textContent = "🎸";
 
 // Step 2 - Clicking increases a counter (Completed)
 const strumCount = document.createElement("div");
-let guitarStrum: number = 0; // keeps track of how many times the guitar has been strummed
-strumCount.textContent = `Guitar Strum Count: ${guitarStrum}`; // displays strum counter
+let guitarStrum = 0; // keeps track of how many times the guitar has been strummed
 
 // When the button is clicked, the guitarStrum counter increments
 button.addEventListener("click", () => {
   guitarStrum++;
-  strumCount.textContent = `Guitar Strum Count: ${guitarStrum}`;
+  updateGuitarStrumDisplay();
 });
 
-/*
-// Step 3 - Automatic clicking (Completed)
+const updateGuitarStrumDisplay = () => {
+  strumCount.textContent = `Guitar Strum Count: ${guitarStrum.toFixed(0)}`;
+  fingerPicking.disabled = guitarStrum < 10;
+};
+
+/* Step 3 - Automatic clicking (Completed)
 const autoStrummer = () => {
   guitarStrum++;
-  // console.log(`Auto-Strum: ${guitarStrum}`); // for debugging
-  strumCount.textContent = `Guitar Strum Count: ${guitarStrum}`;
+  updateGuitarStrumDisplay();
 };
 
 setInterval(autoStrummer, 1000); // strums the guitar every second
 */
 
 // Step 4 - Continuous growth (Completed)
-let tStamp: number = 0;
+let tStamp = 0;
+let guitarGrowth = 1; // set the initial growth rate to 1
 
 // updates the guitar strum counter based on time
 const updateStrum = (timestamp: number) => {
   if (!tStamp) tStamp = timestamp;
   const delta = timestamp - tStamp;
-  // increment based on time
-  const increment = delta / 1000; // increment by (delta ms / 1000 ms) and factor in guitarGrowth
+  const increment = (delta / 1000) * guitarGrowth; // factor in guitarGrowth
   guitarStrum += increment;
-  // updates button
-  strumCount.textContent = `Guitar Strum Count: ${guitarStrum}`;
-  // Set the timeStamp to the current timestamp
+  updateGuitarStrumDisplay();
   tStamp = timestamp;
-
-  // Request the next frame
   requestAnimationFrame(updateStrum);
 };
 
 requestAnimationFrame(updateStrum);
 
 // Step 5 - Purchasing an upgrade
-let guitarGrowth: number = 0;
-
-// fingerPicking upgrade button
 const fingerPicking = document.createElement("button");
-fingerPicking.textContent =
-  "Learn how to use your fingers to strum the guitar! (10 strums)";
-fingerPicking.disabled = true; // starts disabled
+fingerPicking.textContent = "Learn how to use your fingers to strum the guitar! (10 strums)";
+fingerPicking.disabled = true;
 
-/*
 // upgrades when clicked
 fingerPicking.addEventListener("click", () => {
   if (guitarStrum >= 10) {
     guitarStrum -= 10;
     guitarGrowth += 1;
-    updateGuitarStrum();
+    updateGuitarStrumDisplay();
+    guitarGrowthDisplay.textContent = `Guitar Growth: ${guitarGrowth}`;
   }
 });
-*/
 
 // Create a display element for guitarGrowth
 const guitarGrowthDisplay = document.createElement("div");
 guitarGrowthDisplay.textContent = `Guitar Growth: ${guitarGrowth}`;
 document.body.appendChild(guitarGrowthDisplay);
 
-// Update the display when guitarGrowth changes
-fingerPicking.addEventListener("click", () => {
-  if (guitarStrum >= 10) {
-    guitarStrum -= 10;
-    guitarGrowth += 1;
-    updateGuitarStrum();
-    guitarGrowthDisplay.textContent = `Guitar Growth: ${guitarGrowth}`;
-  }
-});
-
-// updating the applications display
-const updateGuitarStrum = () => {
-  strumCount.textContent = `Guitar Strum Count: ${guitarStrum}`;
-  fingerPicking.disabled = guitarStrum < 10;
-};
-
-// fingerPicking upgrade button formatting
-fingerPicking.style.padding = "20px 20px";
-fingerPicking.style.fontSize = "35px";
-fingerPicking.style.marginTop = "10px";
-
-// button formatting
-button.style.padding = "15px 15px";
-button.style.fontSize = "35px";
-button.style.marginTop = "10px";
-
-app.append(header); // adds header
-app.append(button); // adds button
-app.append(strumCount); // adds guitar strum counter
-app.append(fingerPicking); // adds fingerPicking upgrade
+app.append(header);
+app.append(button);
+app.append(strumCount);
+app.append(fingerPicking);
