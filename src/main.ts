@@ -30,7 +30,6 @@ app.append(guitarGrowthDisplay);
 
 // Step 9 - Data Driven Design
 const skillCountsDisplay = document.createElement("div");
-skillCountsDisplay.setAttribute("id", "skillCountsDisplay");
 
 interface Skill {
   name: string;
@@ -86,7 +85,7 @@ const allSkills: Skill[] = [
 const skillCounts: Record<string, number> = {};
 allSkills.forEach((skill) => (skillCounts[skill.name] = 0));
 
-skillCountsDisplay.innerHTML = `Skills Purchased - ${allSkills.map((skill) => `${skill.name}: ${skillCounts[skill.name]}`).join(", ")}`;
+skillCountsDisplay.innerHTML = `Skills Attained - ${allSkills.map((skill) => `${skill.name}: ${skillCounts[skill.name]}`).join(", ")}`;
 app.append(skillCountsDisplay);
 
 // Step 5 - Purchasing an upgrade
@@ -120,7 +119,7 @@ upgrades.forEach((upgrade) => {
 const updateGuitarStrumDisplay = () => {
   strumCount.innerHTML = `${guitarStrum.toFixed(0)} strums`;
   guitarGrowthDisplay.innerHTML = `Growth Rate: ${guitarGrowth.toFixed(2)} strums/sec`;
-  skillCountsDisplay.innerHTML = `Skills Purchased: ${allSkills.map((skill) => `${skill.name}: ${skillCounts[skill.name]}`).join(", ")}`;
+  skillCountsDisplay.innerHTML = `Skills Attained - ${allSkills.map((skill) => `${skill.name}: ${skillCounts[skill.name]}`).join(", ")}`;
   upgrades.forEach((upgrade) => {
     if (upgrade.button) {
       upgrade.button.innerHTML = `${upgrade.name} (+${upgrade.rate} strums/sec) <br> Cost: ${upgrade.currentCost.toFixed(0)} strums <br> ${upgrade.description}`;
