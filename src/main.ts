@@ -13,6 +13,7 @@ app.append(header);
 
 // Step 1 - A button you can click
 const button = document.createElement("button");
+button.classList.add("guitar-button");
 button.textContent = "🎸";
 app.append(button);
 
@@ -25,7 +26,7 @@ app.append(strumCount);
 // Step 6 - Multiple upgrades and status
 const guitarGrowthDisplay = document.createElement("div");
 let guitarGrowth: number = 0; // set the initial growth rate to 0
-guitarGrowthDisplay.textContent = `Guitar Growth: ${guitarGrowth.toFixed(2)} strums/sec`;
+guitarGrowthDisplay.textContent = `Strum Rate: ${guitarGrowth.toFixed(2)} strums/sec`;
 app.append(guitarGrowthDisplay);
 
 // Step 9 - Data Driven Design
@@ -118,7 +119,7 @@ upgrades.forEach((upgrade) => {
 // (step 5 & 6)
 const updateGuitarStrumDisplay = () => {
   strumCount.innerHTML = `${guitarStrum.toFixed(0)} strums`;
-  guitarGrowthDisplay.innerHTML = `Growth Rate: ${guitarGrowth.toFixed(2)} strums/sec`;
+  guitarGrowthDisplay.innerHTML = `Strum Rate: ${guitarGrowth.toFixed(2)} strums/sec`;
   skillCountsDisplay.innerHTML = `Skills Attained - ${allSkills.map((skill) => `${skill.name}: ${skillCounts[skill.name]}`).join(", ")}`;
   upgrades.forEach((upgrade) => {
     if (upgrade.button) {
