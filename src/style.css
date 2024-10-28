@@ -44,15 +44,17 @@ h1 {
 }
 
 #skillCountsDisplay {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
+  position: fixed;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
   font-size: 1rem;
   font-weight: 500;
-  background-color: #242424; /* Optional background to improve readability */
+  background-color: #242424; /* Optional background for readability */
   color: white;
   padding: 0.5rem;
   border-radius: 0.5rem;
+  text-align: center;
 }
 
 button {
