@@ -30,6 +30,7 @@ app.append(guitarGrowthDisplay);
 
 // Step 9 - Data Driven Design
 const skillCountsDisplay = document.createElement("div");
+skillCountsDisplay.setAttribute("id", "skillCountsDisplay");
 
 interface Skill {
   name: string;
@@ -97,7 +98,7 @@ const upgrades = allSkills.map((skill) => ({
 
 upgrades.forEach((upgrade) => {
   const upgradeButton = document.createElement("button");
-  upgradeButton.innerHTML = `Buy ${upgrade.name} (+${upgrade.rate} strums/sec) - ${upgrade.currentCost.toFixed(0)} strums`;
+  upgradeButton.innerHTML = `${upgrade.name} (+${upgrade.rate} strums/sec) <br> ${upgrade.currentCost.toFixed(0)} strums`;
   upgradeButton.disabled = true; // initially disabled
   app.append(upgradeButton);
 

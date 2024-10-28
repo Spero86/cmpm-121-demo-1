@@ -43,6 +43,20 @@ h1 {
   text-align: center;
 }
 
+#skillCountsDisplay {
+  position: fixed;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1rem;
+  font-weight: 500;
+  background-color: #242424; /* Optional background for readability */
+  color: white;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  text-align: center;
+}
+
 button {
   border-radius: 8px;
   border: 1px solid transparent;
