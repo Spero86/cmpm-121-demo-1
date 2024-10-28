@@ -120,7 +120,7 @@ upgrades.forEach((upgrade) => {
 const updateGuitarStrumDisplay = () => {
   strumCount.innerHTML = `${guitarStrum.toFixed(0)} strums`;
   guitarGrowthDisplay.innerHTML = `Growth Rate: ${guitarGrowth.toFixed(2)} strums/sec`;
-  skillCountsDisplay.innerHTML = `Skills Purchased: ${allSkills.map((skill) => `${skill.name}: ${skillCounts[skill.name]}`).join(", ")}`;
+  skillCountsDisplay.innerHTML = `Skills Purchased <br> ${allSkills.map((skill) => `${skill.name}: ${skillCounts[skill.name]}`).join("<br> ")}`;
   upgrades.forEach((upgrade) => {
     if (upgrade.button) {
       upgrade.button.innerHTML = `${upgrade.name} (+${upgrade.rate} strums/sec) <br> Cost: ${upgrade.currentCost.toFixed(0)} strums <br> ${upgrade.description}`;
