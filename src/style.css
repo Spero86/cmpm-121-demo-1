@@ -58,8 +58,16 @@ h1 {
 }
 
 #strumButton {
-  font-size: 5em;
+  font-size: 5em; /* Inspired by Ryo Safadi's drum button */
+  transition: transform 0.2s ease; /* Ensures smooth transition */
 }
+#strumButton:hover { /* Inspired by Zane Shan's button hover effect */
+  transform: scale(1.1); /* Enlarges the button */
+}
+#strumButton:active {
+  transform: scale(0.9); /* Shrinks the button when pressed */
+}
+
 
 button {
   border-radius: 8px;
