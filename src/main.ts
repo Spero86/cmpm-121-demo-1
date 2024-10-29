@@ -12,9 +12,10 @@ header.innerHTML = gameName;
 app.append(header);
 
 // Step 1 - A button you can click
-const button = document.createElement("button");
-button.textContent = "🎸";
-app.append(button);
+const strumButton = document.createElement("button");
+strumButton.textContent = "🎸";
+strumButton.setAttribute("id", "strumButton");
+app.append(strumButton);
 
 // Step 2 - Clicking increases a counter
 const strumCount = document.createElement("div");
@@ -130,7 +131,7 @@ upgrades.forEach((upgrade) => {
 });
 
 // When the button is clicked, the guitarStrum counter increments
-button.addEventListener("click", () => {
+strumButton.addEventListener("click", () => {
   guitarStrum++;
   updateGuitarStrumDisplay();
 });
