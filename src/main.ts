@@ -138,14 +138,25 @@ button.addEventListener("click", () => {
 // Step 4 - Continuous growth
 let tStamp = 0;
 
-// updates the guitar strum counter based on time
+const calculateIncrement = (delta: number, growth: number): number => {
+  return (delta / 1000) * growth;
+};
+
+const applyIncrement = (increment: number): void => {
+  guitarStrum += increment;
+};
+
 const updateStrum = (timestamp: number) => {
   if (!tStamp) tStamp = timestamp;
   const delta = timestamp - tStamp;
-  const increment = (delta / 1000) * guitarGrowth; // factor in guitarGrowth
-  guitarStrum += increment;
+
+  const increment = calculateIncrement(delta, guitarGrowth);
+  applyIncrement(increment);
+
   updateGuitarStrumDisplay();
+
   tStamp = timestamp;
+
   requestAnimationFrame(updateStrum);
 };
 
