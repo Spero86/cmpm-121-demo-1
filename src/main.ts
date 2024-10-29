@@ -100,15 +100,14 @@ const allSkills: Skill[] = [
 const skillCounts: Record<string, number> = {};
 allSkills.forEach((skill) => (skillCounts[skill.name] = 0));
 
-// skillCountsDisplay.innerHTML = `Skills Attained - ${allSkills.map((skill) => `${skill.name}: ${skillCounts[skill.name]}`).join(", ")}`;
-
-
 // Step 5 - Purchasing an upgrade
 const upgrades = allSkills.map((skill) => ({
   ...skill,
   currentCost: skill.cost,
   button: undefined as HTMLButtonElement | undefined,
 }));
+
+const COST_INCREASE_FACTOR = 1.15;
 
 upgrades.forEach((upgrade) => {
   const upgradeButton = document.createElement("button");
@@ -122,7 +121,7 @@ upgrades.forEach((upgrade) => {
       guitarStrum -= upgrade.currentCost;
       guitarGrowth += upgrade.rate;
       skillCounts[upgrade.name]++;
-      upgrade.currentCost *= 1.15; // increase cost by factor of 1.15
+      upgrade.currentCost *= COST_INCREASE_FACTOR;
       updateGuitarStrumDisplay();
     }
   });
