@@ -58,16 +58,16 @@ h1 {
 }
 
 #strumButton {
-  font-size: 5em; /* Inspired by Ryo Safadi's drum button */
+  font-size: 5em; /* Inspired by Ryo Safadi's drum button https://github.com/ryosafadi/cmpm-121-demo-1/tree/main */
   transition: transform 0.2s ease; /* Ensures smooth transition */
 }
-#strumButton:hover { /* Inspired by Zane Shan's button hover effect */
+#strumButton:hover {
+  /* Inspired by Zane Shan's button hover effect https://github.com/ZaneShan/cmpm-121-demo-1 */
   transform: scale(1.1); /* Enlarges the button */
 }
 #strumButton:active {
   transform: scale(0.9); /* Shrinks the button when pressed */
 }
-
 
 button {
   border-radius: 8px;
